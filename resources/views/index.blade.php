@@ -18,10 +18,27 @@
             <h2 class="fw-bold mb-1">Daftar Mahasiswa</h2>
         </div>
 
-        <a href="{{ route('mahasiswa.create') }}"
-           class="btn btn-primary">
-            + Tambah Mahasiswa
-        </a>
+        <div class="d-flex align-items-center gap-2">
+
+            @if (auth()->user()->hasRole('admin'))
+                <a href="{{ route('mahasiswa.create') }}"
+                   class="btn btn-primary">
+                    + Tambah Mahasiswa
+                </a>
+            @endif
+
+            <span class="text-secondary small">
+                {{ auth()->user()->name }} ({{ auth()->user()->role }})
+            </span>
+
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                    Logout
+                </button>
+            </form>
+
+        </div>
     </div>
 
   
@@ -143,29 +160,35 @@
                                 <td>
                                     <div class="d-flex justify-content-center gap-2">
 
-                                        <a href="{{ route('mahasiswa.edit', $mhs->id) }}"
-                                           class="btn btn-warning btn-sm">
-                                            Edit
-                                        </a>
+                                
+                                        @if (auth()->user()->hasRole('admin'))
+                                            <a href="{{ route('mahasiswa.edit', $mhs->id) }}"
+                                               class="btn btn-warning btn-sm">
+                                                Edit
+                                            </a>
+                                        @endif
 
                                        <a href="{{ route('mahasiswa.show', $mhs->id) }}"
                                             class="btn btn-primary btn-sm">
                                             Detail
                                         </a>
 
-                                        <form
-                                            action="{{ route('mahasiswa.destroy', $mhs->id) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus data mahasiswa ini?')">
+                                    
+                                        @if (auth()->user()->hasRole('admin'))
+                                            <form
+                                                action="{{ route('mahasiswa.destroy', $mhs->id) }}"
+                                                method="POST"
+                                                onsubmit="return confirm('Yakin ingin menghapus data mahasiswa ini?')">
 
-                                            @csrf
-                                            @method('DELETE')
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button type="submit"
-                                                    class="btn btn-danger btn-sm">
-                                                Hapus
-                                            </button>
-                                        </form>
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        @endif
 
                                     </div>
                                 </td>

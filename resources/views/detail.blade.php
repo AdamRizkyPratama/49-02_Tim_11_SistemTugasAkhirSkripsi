@@ -75,10 +75,12 @@
                             Kembali
                         </a>
 
-                        <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}"
-                           class="btn btn-warning">
-                            Edit Data
-                        </a>
+                        @if (auth()->user()->hasRole('admin'))
+                            <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}"
+                               class="btn btn-warning">
+                                Edit Data
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
