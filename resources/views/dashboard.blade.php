@@ -7,9 +7,21 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet">
 
     <style>
-        .stat-card { border-left: 4px solid; }
+        body { background: #f5f7fb; }
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
         .avatar {
             width: 48px;
             height: 48px;
@@ -21,79 +33,65 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #e7f1ff;
-            color: #0d6efd;
+            background: #e0e7ff;
+            color: #4338ca;
             font-weight: 700;
             font-size: 1.1rem;
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container py-5">
+<x-navbar />
 
-    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
-        <div>
-            <h2 class="fw-bold mb-1">Dashboard Admin</h2>
-            <p class="text-secondary mb-0">
-                Halo, {{ auth()->user()->name }}
-                <span class="badge bg-danger">Admin</span>
-            </p>
-        </div>
+<div class="container py-4">
 
-        <div class="d-flex align-items-center gap-2">
-            <a href="{{ route('profile.edit') }}"
-               class="btn btn-outline-secondary btn-sm">
-                Profil
-            </a>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-outline-danger btn-sm">
-                    Logout
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <div class="alert alert-primary border-0 shadow-sm" role="alert">
-        Anda login sebagai <strong>Admin</strong>. Anda dapat melihat,
-        menambah, mengubah, dan menghapus data mahasiswa.
+    <div class="mb-4">
+        <h3 class="fw-bold mb-1">Dashboard</h3>
+        <p class="text-secondary mb-0">
+            Selamat datang kembali, {{ auth()->user()->name }}.
+        </p>
     </div>
 
     <div class="row g-3 mb-4">
         <div class="col-md-4">
-            <div class="card stat-card border-0 shadow-sm h-100"
-                 style="border-left-color: #0d6efd !important;">
-                <div class="card-body">
-                    <p class="text-secondary small text-uppercase fw-semibold mb-1">
-                        Total Mahasiswa
-                    </p>
-                    <h2 class="fw-bold mb-0">{{ $total }}</h2>
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="stat-icon bg-primary-subtle text-primary">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div>
+                        <div class="text-secondary small">Total Mahasiswa</div>
+                        <div class="fs-3 fw-bold lh-1 mt-1">{{ $total }}</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="card stat-card border-0 shadow-sm h-100"
-                 style="border-left-color: #198754 !important;">
-                <div class="card-body">
-                    <p class="text-secondary small text-uppercase fw-semibold mb-1">
-                        Mahasiswa Aktif
-                    </p>
-                    <h2 class="fw-bold text-success mb-0">{{ $aktif }}</h2>
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="stat-icon bg-success-subtle text-success">
+                        <i class="bi bi-person-check-fill"></i>
+                    </div>
+                    <div>
+                        <div class="text-secondary small">Mahasiswa Aktif</div>
+                        <div class="fs-3 fw-bold lh-1 mt-1">{{ $aktif }}</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="card stat-card border-0 shadow-sm h-100"
-                 style="border-left-color: #6c757d !important;">
-                <div class="card-body">
-                    <p class="text-secondary small text-uppercase fw-semibold mb-1">
-                        Tidak Aktif
-                    </p>
-                    <h2 class="fw-bold text-secondary mb-0">{{ $tidakAktif }}</h2>
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body d-flex align-items-center gap-3">
+                    <div class="stat-icon bg-secondary-subtle text-secondary">
+                        <i class="bi bi-person-dash-fill"></i>
+                    </div>
+                    <div>
+                        <div class="text-secondary small">Tidak Aktif</div>
+                        <div class="fs-3 fw-bold lh-1 mt-1">{{ $tidakAktif }}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -102,26 +100,10 @@
     <div class="card border-0 shadow-sm">
 
         <div class="card-header bg-white border-0 pt-4 px-4 pb-0">
-            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-                <div>
-                    <h5 class="fw-bold mb-0">Mahasiswa Terbaru</h5>
-                    <p class="text-secondary small mb-0">
-                        5 data yang terakhir ditambahkan
-                    </p>
-                </div>
-
-                <div class="d-flex gap-2">
-                    <a href="{{ route('mahasiswa.index') }}"
-                       class="btn btn-outline-primary btn-sm">
-                        Lihat Semua
-                    </a>
-
-                    <a href="{{ route('mahasiswa.create') }}"
-                       class="btn btn-primary btn-sm">
-                        + Tambah Mahasiswa
-                    </a>
-                </div>
-            </div>
+            <h5 class="fw-bold mb-0">Mahasiswa Terbaru</h5>
+            <p class="text-secondary small mb-0">
+                5 data yang terakhir ditambahkan
+            </p>
         </div>
 
         <div class="card-body p-2 p-md-3">
