@@ -30,17 +30,6 @@
                 </a>
             @endif
 
-            <span class="text-secondary small">
-                {{ auth()->user()->name }} ({{ auth()->user()->role }})
-            </span>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="btn btn-outline-danger btn-sm">
-                    Logout
-                </button>
-            </form>
-
         </div>
     </div>
 

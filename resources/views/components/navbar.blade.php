@@ -143,6 +143,56 @@
                         Kelola Mahasiswa
                     </a>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a href="#"
+                       class="nav-link app-link {{ request()->routeIs('ruang.*', 'gedung.*', 'fasilitas.*') ? 'active' : '' }}"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="bi bi-building"></i>
+                        Ruang &amp; Sidang
+                        <i class="bi bi-chevron-down small"></i>
+                    </a>
+
+                    <ul class="dropdown-menu app-dropdown shadow">
+                        <li>
+                            <a class="dropdown-item {{ request()->routeIs('ruang.*') ? 'active' : '' }}"
+                               href="{{ route('ruang.index') }}">
+                                <i class="bi bi-door-open me-2"></i>Master Ruang
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {{ request()->routeIs('gedung.*') ? 'active' : '' }}"
+                               href="{{ route('gedung.index') }}">
+                                <i class="bi bi-buildings me-2"></i>Nomor Gedung
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item {{ request()->routeIs('fasilitas.*') ? 'active' : '' }}"
+                               href="{{ route('fasilitas.index') }}">
+                                <i class="bi bi-projector me-2"></i>Fasilitas Ruangan
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('topik.index') }}"
+                       class="nav-link app-link {{ request()->routeIs('topik.*') ? 'active' : '' }}">
+                        <i class="bi bi-journal-text"></i>
+                        Topik Riset
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="{{ route('dosen.index') }}"
+                    class="nav-link app-link {{ request()->routeIs('dosen.*') ? 'active' : '' }}">
+                        <i class="bi bi-person-badge"></i>
+                        Dosen Pembimbing
+                    </a>
+                </li>
             </ul>
 
             <div class="dropdown py-2 py-md-0">

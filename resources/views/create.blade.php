@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('mahasiswa.create') }}"
+            <form action="{{ route('mahasiswa.store') }}"
                   method="POST"
                   enctype="multipart/form-data">
 
